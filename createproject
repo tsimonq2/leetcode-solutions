@@ -1,0 +1,26 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+    echo "Usage: $0 <problem_number>"
+    exit 1
+fi
+
+# Problem number
+PROBLEM_NUM=$1
+
+# Create directories
+mkdir -p ${PROBLEM_NUM}/cpp
+mkdir -p ${PROBLEM_NUM}/python3
+
+# Create README.md
+touch ${PROBLEM_NUM}/README.md
+
+# Copy the template files
+cp common/main.cpp ${PROBLEM_NUM}/cpp/main.cpp
+cp common/main.py ${PROBLEM_NUM}/python3/main.py
+
+# Symlink Makefile and CMakeLists.txt
+ln -sf ../../common/Makefile ${PROBLEM_NUM}/cpp/Makefile
+ln -sf ../../common/CMakeLists.txt ${PROBLEM_NUM}/cpp/CMakeLists.txt
+
+echo "Problem ${PROBLEM_NUM} created."
